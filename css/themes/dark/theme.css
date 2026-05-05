@@ -21,7 +21,52 @@
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 18px;
-
-
 }
 
+body.nav-sidebar .menu-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.nav-sidebar .navbar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 260px;
+    margin: 0;
+    border-radius: 0;
+    border-left: 1px solid var(--border);
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-out;
+    z-index: 1000;
+}
+
+body.nav-sidebar.sidebar-open .navbar{
+    transform: translateX(0);
+}
+
+
+
+body.nav-sidebar .nav-container{
+    height: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 18px;
+}
+
+body.nav-sidebar .nav-links{
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+body.nav-sidebar .nav-links a{
+    width: 100%;
+}

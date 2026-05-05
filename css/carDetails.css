@@ -147,7 +147,6 @@ main{
 
 .car-img.active{
     outline: 2px solid var(--primary);
-    outline-offset: 2px;
     opacity: 1;
 }
 
@@ -173,11 +172,7 @@ main{
     color: var(--text);
 }
 
-@media (max-width: 900px){
-    .container{
-        grid-template-columns: 1fr;
-    }
-}
+
 #back-button{
     display: flex;
     justify-content: center;

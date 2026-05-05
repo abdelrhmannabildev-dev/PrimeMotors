@@ -78,7 +78,6 @@ function displayCars(list) {
         card.classList.add('car-card');
 
         card.dataset.name = car.name;
-        card.dataset.type = car.type;
 
         let specs = car.specs ? car.specs : '';
 
@@ -130,8 +129,7 @@ cardsContainer.addEventListener('click', (e) => {
     if (!card) return;
 
     const name = card.dataset.name;
-    const type = card.dataset.type;
 
     window.location.href =
-        `carDetails.html?name=${encodeURIComponent(name)}&category=${encodeURIComponent(type)}`;
+        `carDetails.html?name=${encodeURIComponent(name)}`;
 });

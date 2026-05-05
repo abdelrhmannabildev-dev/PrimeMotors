@@ -137,7 +137,6 @@ main{
     opacity: 0.4;
     transform: scale(0.95);
 }
-/* COUNTER */
 .cars-container .carnums{
     background-color: transparent;
     color: var(--text);

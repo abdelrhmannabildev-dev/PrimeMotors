@@ -3,7 +3,6 @@ import { cars } from "./data.js";
 
 const url= new URLSearchParams(window.location.search); 
 const carParam= url.get('name');
-const categoryParam = url.get('category');
 const car = cars.find((car) => car.name === carParam);
 
 console.log(carParam);
@@ -13,14 +12,14 @@ const carDetails = document.querySelector(".car-details");
 
 //  car details page
 function renderDetails(car) {
-    const allImages = car.images.length ? car.images : [car.image].filter(Boolean);
-    const price = typeof car.price === "number" ? `$${car.price.toLocaleString()}` : car.price;
+    const allImages =car.images;
+    const price = `$${car.price}`;
 
     const infos = [
-        car.engine ? { label: "Engine", value: car.engine } : null,
-        car.fuel ? { label: "Fuel", value: car.fuel } : null,
-        car.topSpeed ? { label: "Top speed", value: `${car.topSpeed} km/h` } : null,
-        car.seats ? { label: "Seats", value: car.seats } : null,
+        { label: "Engine", value: car.engine } ,
+        { label: "Fuel", value: car.fuel },
+        { label: "Top speed", value: `${car.topSpeed} km/h` },
+        { label: "Seats", value: car.seats },
     ]
 
     let galleryHtml = "";
@@ -61,7 +60,7 @@ function renderDetails(car) {
         `;
     }
 
-    let descriptionText = car.description ? car.description : "";
+    let descriptionText = car.description;
 
     let detailsHtml = `
         <div class="container">
@@ -85,7 +84,7 @@ function renderDetails(car) {
 
             <div class="right-section">
                 <div class="category">
-                    <h3>${categoryParam}</h3>
+                    <h3>${car.type}</h3>
                 </div>
 
                 <img class="car-main-image" src="${car.image}" alt="${car.name}">

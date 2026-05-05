@@ -7,8 +7,7 @@ if(loggedInUser){
     login.style.display="none";
     user.style.display="block";
     user.textContent="Welcome "+loggedInUser.name;
-
-}
+    logoutButton.style.display="block";}
 else{
     login.style.display="block";
     user.style.display="none";
