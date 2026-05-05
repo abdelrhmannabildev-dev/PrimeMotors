@@ -1,0 +1,141 @@
+ {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #000;
+}
+
+.logo img {
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2em;
+    color: black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 20px;
+}
+
+label {
+    font-weight: bold;
+    color: black;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.radio-group label {
+    margin-left: 5px;
+    color: black;
+}
+
+input[type="radio"]:checked + label {
+    color: #000;
+    font-weight: bold;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+input[type="submit"] {
+    background-color: black;
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: #333;
+}
+
+input[type="reset"] {
+    background-color: #ccc;
+    color: black;
+}
+
+input[type="reset"]:hover {
+    background-color: #bbb;
+}
+
+a {
+    color: black;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    .radio-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

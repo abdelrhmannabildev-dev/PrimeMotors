@@ -1,0 +1,27 @@
+:root {
+    /* Backgrounds */
+    --bg: #0f172a;
+    --surface: #111827;
+    --surface-2: #1f2937;
+
+    /* Brand */
+    --primary: #3b82f6;
+    --primary-hover: #60a5fa;
+
+    /* Text */
+    --text: #f9fafb;
+    --text-muted: #9ca3af;
+
+    /* UI */
+    --border: #374151;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.5);
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+
+
+}
+

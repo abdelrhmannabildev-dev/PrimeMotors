@@ -1,0 +1,112 @@
+/* ===== Layout ===== */
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* بدل height */
+    padding: 20px;
+}
+
+/* ===== Container ===== */
+.form-container {
+    width: min(500px, 100%);
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* ===== Form ===== */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ===== Group ===== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ===== Label ===== */
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+/* ===== Inputs & Select ===== */
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--surface-2);
+    color: var(--text);
+    box-sizing: border-box;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ===== Focus State ===== */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #4f8cff;
+    box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
+}
+
+/* ===== Disabled Select ===== */
+.form-group select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ===== Button ===== */
+form button {
+    background-color: var(--surface-2);
+    cursor: pointer;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Hover */
+form button:hover {
+    background-color: var(--surface);
+    transform: translateY(-1px);
+}
+
+/* Active */
+form button:active {
+    transform: translateY(0);
+}
+
+/* ===== Error ===== */
+.error {
+    color: #ff4d4f;
+    font-size: 0.8rem;
+    min-height: 14px;
+}
+
+/* ===== Success ===== */
+.success {
+    color: #22c55e;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* ===== Responsive تحسين ===== */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 16px;
+    }
+}

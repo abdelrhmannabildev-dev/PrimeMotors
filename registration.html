@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Registration.Prime Motors</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="login.css">
+    <link id="themeStylesheet" rel="stylesheet" href="css/themes/light/theme.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <header>
+        <button class="menu-toggle" type="button" >☰</button>
+
+            <nav class="navbar">
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Cars.html" class="active">Products</a></li>
+                        <li><a href="category.html">category</a></li>
+                        <li><a href="test_drive.html">Test Drive</a></li>
+                        <li><a href="cart.html">in cart</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html"> Contact Us</a></li>
+                        <li><a href="about.html">about Us</a></li>
+                        <li class="login"><a href="login.html" class="login"> Login</a></li>
+                    </ul>
+                <button type="button" class="theme-toggle" >Theme</button>
+                <button id="logout" onclick="logout()">Logout</button>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Registration</h1>
+
+        <div class="form-box">
+        </div>
+        <form method="post" action="login.html">
+            <label for="name">Name</label>
+            <input autofocus type="text" id="name" name="Name" required placeholder="Enter your name"/><br/><br/>
+            
+            <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="Phone_Number" required placeholder="01*********" inputmode="numeric" pattern="01[0125][0-9]{8}"
+        title="Enter a valid Egyptian phone number starting with 010, 011, 012, or 015 and 11 digits total"/><br/><br/>
+        
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="Date_of_Birth" required/><br/><br/>
+
+            <div class="radio-group">
+                <input type="radio" id="male" name="gender" value="Male"/>
+                <label for="male">Male</label>
+        
+                <input type="radio" id="female" name="gender" value="female"/>
+                <label for="female">Female</label>
+            </div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email" required placeholder="Enter your email"/><br/><br/>
+        
+                <label for="password">Password</label>
+                <input type="password"id="password" name="Password" required placeholder="Enter your password" minlength="8" maxlength="15"/><br/><br/>
+            
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password"id="confirm_password" name="Confirm_Password" required placeholder="Confirm your password" minlength="8" maxlength="15"/><br/><br/>
+        
+        
+                <input type="submit" value="Register"/>
+            
+                <input type="reset" value="Reset"/><br/><br/>
+
+            <p>Already have an account? <a href="login.html">Login</a></p>
+            <p>Back to <a href="index.html">Home</a></p>
+        </form>
+        </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div class="footer-col">
+                    <h4>Primo Motors</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i >F</i></a>
+                        <a href="#"><i >TW</i></a>
+                        <a href="#"><i >ig</i></a>
+                        <a href="#"><i >Li</i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Primo Motors. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+        <script src="registration.js"></script>
+        <script src="theme.js"></script>
+        <script src="user.js"></script>
+    </body>
+</html>

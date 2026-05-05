@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/test_drive.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link id="themeStylesheet" rel="stylesheet" href="css/themes/light/theme.css">
+
+</head>
+<body >
+    <header>
+        <button class="menu-toggle" type="button" >☰</button>
+
+            <nav class="navbar">
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Cars.html" class="active">Products</a></li>
+                        <li><a href="category.html">category</a></li>
+                        <li><a href="test_drive.html">Test Drive</a></li>
+                        <li><a href="cart.html">in cart</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html"> Contact Us</a></li>
+                        <li><a href="about.html">about Us</a></li>
+                        <li class="login"><a href="login.html" class="login"> Login</a></li>
+                    </ul>
+                <button type="button" class="theme-toggle" >Theme</button>
+                <button id="logout" onclick="logout()">Logout</button>
+
+            </div>
+        </nav>
+    </header>
+
+    </header>    <main>
+        <div class="form-container">
+            <h3>Test Drive</h3>
+            <form id="testDriveForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone">
+                <div class="error" id="phoneError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="car">Brand</label>
+                <select id="car">
+                    <option value="">Select Brand</option>
+                    <option value="audi">Audi</option>
+                    <option value="tesla">Tesla</option>
+                    <option value="mercedes">Mercedes-Benz</option>
+                    <option value="porsche">Porsche</option>
+                    <option value="lamborghini">Lamborghini</option>
+                    <option value="ferrari">Ferrari</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="ford">Ford</option>
+                    <option value="chevrolet">Chevrolet</option>
+                </select>
+                <div class="error" id="carError"></div>
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <select id="model" disabled>
+                    <option value="">Select Model</option>
+                </select>
+                <div class="error" id="modelError"></div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date">
+                <div class="error" id="dateError"></div>
+            </div>
+            <button type="submit">Submit</button>
+            <div class="success" id="successMsg"></div>
+            </form>        
+        </div>
+    </main>
+    <footer class="footer">
+            <div class="footer-grid">
+
+                <div class="footer-col">
+                    <h4>Primo Motors</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i >F</i></a>
+                        <a href="#"><i >TW</i></a>
+                        <a href="#"><i >ig</i></a>
+                        <a href="#"><i >Li</i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Primo Motors. All rights reserved.</p>
+            </div>
+    </footer>
+    <script>
+        const carData = {
+        "audi": ["Audi A6", "Audi Q5", "Audi A8"],
+        "tesla": ["Tesla Model S", "Tesla Model 3", "Tesla Model X"],
+        "mercedes": ["Mercedes-Benz S-Class", "Mercedes-Benz E-Class", "Mercedes-Benz GLE"],
+        "porsche": ["Porsche 911", "Porsche Cayenne", "Porsche Taycan"],
+        "lamborghini": ["Lamborghini Huracan"],
+        "ferrari": ["Ferrari F8 Tributo"],
+        "toyota": ["Toyota Land Cruiser", "Toyota Corolla"],
+        "ford": ["Ford Mustang GT"],
+        "chevrolet": ["Chevrolet Camaro"]
+        };
+
+        const carSelect = document.getElementById("car");
+        const modelSelect = document.getElementById("model");
+        const userLogged=localStorage.getItem("loggedInUser")
+        carSelect.addEventListener("change", function() {
+        const selectedBrand = this.value;
+        modelSelect.innerHTML = '<option value="">Select Model</option>';
+        
+        if (selectedBrand && carData[selectedBrand]) {
+            modelSelect.disabled = false;
+            carData[selectedBrand].forEach(m => {
+            let opt = document.createElement("option");
+            opt.value = m;
+            opt.textContent = m;
+            modelSelect.appendChild(opt);
+            });
+        } else {
+            modelSelect.disabled = true;
+        }
+        });
+
+        document.getElementById("testDriveForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        let name = document.getElementById("name").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let car = carSelect.value;
+        let model = modelSelect.value;
+        let date = document.getElementById("date").value;
+
+        document.querySelectorAll(".error").forEach(el => el.innerText = "");
+        document.getElementById("successMsg").innerText = "";
+
+        let valid = true;
+        if (name.length < 3) { document.getElementById("nameError").innerText = "Name is too short"; valid = false; }
+        if (!/^01[0-9]{9}$/.test(phone)) { document.getElementById("phoneError").innerText = "Invalid phone"; valid = false; }
+        if (!email.includes("@")) { document.getElementById("emailError").innerText = "Invalid email"; valid = false; }
+        if (!car) { document.getElementById("carError").innerText = "Select brand"; valid = false; }
+        if (!model) { document.getElementById("modelError").innerText = "Select model"; valid = false; }
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+
+        if (!date || selectedDate < today) {
+            document.getElementById("dateError").innerText = "Please select a valid future date";
+            valid = false;
+        }
+        if (valid) {
+            let booking = { userLogged ,name, phone, email, car, model, date };
+            let bookings = JSON.parse(localStorage.getItem("testDrive")) || [];
+            bookings.push(booking);
+            localStorage.setItem("testDrive", JSON.stringify(bookings));
+
+            document.getElementById("successMsg").innerText = "Booking Successful !";
+            this.reset();
+            modelSelect.disabled = true;
+        }
+        });
+    </script>
+    <script src="theme.js"></script>
+    <script src="user.js"></script>
+</body>
+</html>

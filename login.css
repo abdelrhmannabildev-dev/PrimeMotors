@@ -1,0 +1,84 @@
+main{
+    min-height: 60vh;
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    align-items: center;
+}
+
+.img img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--border);
+}
+
+form {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    min-width: 50vw;
+    box-shadow: var(--shadow-sm);
+    background-color: var(--surface-2);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    margin: 24px auto 50px;
+}
+form a{
+    transition: all 0.5s ease;
+}
+form a:hover{
+    text-decoration: underline;
+    color: var(--primary);
+}
+label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+input
+{
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: var(--text);
+}
+
+input[type="submit"] {
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+input[type="reset"] {
+    background-color: var(--surface);
+    color: var(--text);
+    border: none;
+    box-shadow: var(--shadow-sm);
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="reset"]:hover {
+    background-color: var(--surface-2);
+    box-shadow: var(--shadow-md);
+}
