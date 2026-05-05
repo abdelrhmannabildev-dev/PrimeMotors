@@ -1,115 +1,137 @@
-import { cars} from './data.js';
-const categories = [...new Set(cars.map(car => car.type))];
+import { cars } from './data.js';
 
 const categoryContainer = document.querySelector('.category');
 const cardsContainer = document.querySelector('.car-cards');
 
-const engineTypeFilter = document.getElementById("engine-type");
-const maxPriceFilter = document.getElementById("max-price");
-const priceValueDisplay = document.getElementById("price-value");
-const searchInput = document.getElementById("search");
+const engineFilter = document.getElementById("engine-type");
+const priceFilter = document.getElementById("max-price");
+const priceText = document.getElementById("price-value");
+const searchBox = document.getElementById("search");
 
-let selectedCategory = 'all';
+let activeCategory = 'all';
 
-//  desplay cars 
-displayCategory(categories);
-displayCars(cars);
+let categories = [];
 
-//  category listener 
-categoryContainer.addEventListener('click', (e) => {
-    if (!e.target.classList.contains('category-label')) return;
-
-    document.querySelectorAll('.category-label')
-        .forEach(el => el.classList.remove('active'));
-
-    e.target.classList.add('active');
-
-    selectedCategory = e.target.textContent.toLowerCase();
-
-    filterCars();
-});
-
-//  filtering 
-maxPriceFilter.addEventListener('input', () => {
-    priceValueDisplay.textContent = maxPriceFilter.value;
-    filterCars();
-});
-
-engineTypeFilter.addEventListener('change', filterCars);
-searchInput.addEventListener('input', filterCars);
-
-//  show category 
-function displayCategory(categories) {
-    categoryContainer.innerHTML = '';
-
-    const allCard = document.createElement('div');
-    allCard.classList.add('category-label', 'active');
-    allCard.textContent = 'All';
-    categoryContainer.appendChild(allCard);
-
-    categories.forEach(type => {
-        const typeCard = document.createElement('div');
-        typeCard.classList.add('category-label');
-        typeCard.textContent = type;
-        categoryContainer.appendChild(typeCard);
-    });
+for (let i = 0; i < cars.length; i++) {
+    if (!categories.includes(cars[i].type)) {
+        categories.push(cars[i].type);
+    }
 }
 
-//  displaying cards 
+displayCategories(categories);
+displayCars(cars);
+
+// category click
+categoryContainer.addEventListener('click', (e) => {
+    const item = e.target.closest('.category-label');
+    if (!item) return;
+
+    const allItems = document.querySelectorAll('.category-label');
+    for (let i = 0; i < allItems.length; i++) {
+        allItems[i].classList.remove('active');
+    }
+
+    item.classList.add('active');
+
+    activeCategory = item.textContent.toLowerCase();
+    filterCars();
+});
+
+// filters
+priceFilter.addEventListener('input', () => {
+    priceText.textContent = priceFilter.value;
+    filterCars();
+});
+
+engineFilter.addEventListener('change', filterCars);
+searchBox.addEventListener('input', filterCars);
+
+// show categories
+function displayCategories(list) {
+    categoryContainer.innerHTML = '';
+
+    const allBtn = document.createElement('div');
+    allBtn.classList.add('category-label', 'active');
+    allBtn.textContent = 'All';
+    categoryContainer.appendChild(allBtn);
+
+    for (let i = 0; i < list.length; i++) {
+        const item = document.createElement('div');
+        item.classList.add('category-label');
+        item.textContent = list[i];
+
+        categoryContainer.appendChild(item);
+    }
+}
+
+// show cars
 function displayCars(list) {
     cardsContainer.innerHTML = '';
 
-    const carNums = document.querySelector('.carnums');
-    carNums.textContent = `${list.length} Cars`;
+    const counter = document.querySelector('.carnums');
+    counter.textContent = list.length + ' Cars';
 
-    list.forEach(car => {
-        const carCard = document.createElement('div');
-        carCard.classList.add('car-card');
+    for (let i = 0; i < list.length; i++) {
+        const car = list[i];
 
+        const card = document.createElement('div');
+        card.classList.add('car-card');
 
-        carCard.dataset.name = car.name;
-        carCard.dataset.type = car.type;
+        card.dataset.name = car.name;
+        card.dataset.type = car.type;
 
-        carCard.innerHTML = `
+        let specs = car.specs ? car.specs : '';
+
+        card.innerHTML = `
             <img src="${car.image}" alt="${car.name}">
             <h4>${car.name}</h4>
-            <p>${car.specs || ''}</p>
+            <p>${specs}</p>
             <p class="price">$${car.price}</p>
         `;
 
-        cardsContainer.appendChild(carCard);
-    });
+        cardsContainer.appendChild(card);
+    }
 }
-//  FILTER logic
+
+// filter logic
 function filterCars() {
-    const selectedEngine = engineTypeFilter.value;
-    const maxPrice = parseInt(maxPriceFilter.value);
-    const searchTerm = searchInput.value.toLowerCase();
+    const engine = engineFilter.value;
+    const maxPrice = Number(priceFilter.value);
+    const search = searchBox.value.toLowerCase();
 
-    const result = cars.filter(car => {
-    const matchesEngine =
-        selectedEngine === 'all' ||
-        car.engine.toLowerCase() === selectedEngine.toLowerCase();
-        const matchesPrice = car.price <= maxPrice;
+    let filtered = [];
 
-        const matchesSearch = car.name.toLowerCase().includes(searchTerm);
+    for (let i = 0; i < cars.length; i++) {
+        const car = cars[i];
 
-        const matchesCategory =
-            selectedCategory === 'all' || car.type.toLowerCase() === selectedCategory;
+        let matchEngine =
+            engine === 'all' ||
+            car.engine.toLowerCase() === engine.toLowerCase();
 
-        return matchesEngine && matchesPrice && matchesSearch && matchesCategory;
-    });
+        let matchPrice = car.price <= maxPrice;
 
-    displayCars(result);
+        let matchSearch = car.name.toLowerCase().includes(search);
+
+        let matchCategory =
+            activeCategory === 'all' ||
+            car.type.toLowerCase() === activeCategory;
+
+        if (matchEngine && matchPrice && matchSearch && matchCategory) {
+            filtered.push(car);
+        }
+    }
+
+    displayCars(filtered);
 }
 
-
-// car details 
+// go to details
 cardsContainer.addEventListener('click', (e) => {
     const card = e.target.closest('.car-card');
     if (!card) return;
-    const carName=card.dataset.name;
-    const category = card.dataset.type;
-    console.log(carName);
-    window.location.href = `carDetails.html?name=${encodeURIComponent(carName)}&category=${encodeURIComponent(category)}`;
+
+    const name = card.dataset.name;
+    const type = card.dataset.type;
+
+    window.location.href =
+        `carDetails.html?name=${encodeURIComponent(name)}&category=${encodeURIComponent(type)}`;
 });

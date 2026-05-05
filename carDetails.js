@@ -10,8 +10,10 @@ console.log(carParam);
 
 const carDetails = document.querySelector(".car-details");
 
+
+//  car details page
 function renderDetails(car) {
-    const allImages = Array.isArray(car.images) && car.images.length ? car.images : [car.image].filter(Boolean);
+    const allImages = car.images.length ? car.images : [car.image].filter(Boolean);
     const price = typeof car.price === "number" ? `$${car.price.toLocaleString()}` : car.price;
 
     const infos = [
@@ -19,64 +21,91 @@ function renderDetails(car) {
         car.fuel ? { label: "Fuel", value: car.fuel } : null,
         car.topSpeed ? { label: "Top speed", value: `${car.topSpeed} km/h` } : null,
         car.seats ? { label: "Seats", value: car.seats } : null,
-    ].filter(Boolean);
+    ]
 
-    const galleryHtml = allImages.length > 1
-        ? `
+    let galleryHtml = "";
+
+    if (allImages.length > 1) {
+        let imagesHtml = "";
+
+        for (let i = 0; i < allImages.length; i++) {
+            let src = allImages[i];
+
+            let className = "car-img";
+            if (i === 0) {
+                className = "car-img active";
+            }
+
+            imagesHtml += `
+                <img class="${className}" src="${src}" alt="${car.name}" >
+            `;
+        }
+
+        galleryHtml = `
             <div class="car-gallery">
-                ${allImages
-                    .map(
-                        (src, idx) =>
-                            `<img class="car-img${idx === 0 ? " active" : ""}" src="${src}" alt="${car.name}" data-src="${src}">`
-                    )
-                    .join("")}
+                ${imagesHtml}
             </div>
-        `
-        : "";
+        `;
+    }
 
-    const detailsHtml = `
+    let infosHtml = "";
+
+    for (let i = 0; i < infos.length; i++) {
+        let item = infos[i];
+
+        infosHtml += `
+            <div class="info">
+                <span class="info-label">${item.label}</span>
+                <span class="info-value">${item.value}</span>
+            </div>
+        `;
+    }
+
+    let descriptionText = car.description ? car.description : "";
+
+    let detailsHtml = `
         <div class="container">
 
             <div class="left-section">
                 <h1>${car.name}</h1>
                 <h2>${price}</h2>
-                ${infos.length
-                    ? `
-                        <div class="meta-infos">
-                            ${infos
-                                .map(
-                                    (c) => `
-                                        <div class="info">
-                                            <span class="info-label">${c.label}</span>
-                                            <span class="info-value">${c.value}</span>
-                                        </div>
-                                    `
-                                )
-                                .join("")}
-                        </div>
-                    `
-                    : ""}
-                <p>${car.description || ""}</p>
-                <div class="buy"><button id="buy-button">add to card <span style="color: rgb(154, 255, 154);">$$</span></button></div>
+
+                <div class="infos-container">
+                    ${infosHtml}
+                </div>
+
+                <p>${descriptionText}</p>
+
+                <div class="buy">
+                    <button id="buy-button">
+                        add to card <span style="color: rgb(154, 255, 154);">$$</span>
+                    </button>
+                </div>
             </div>
+
             <div class="right-section">
-                <div class="category"><h3>${categoryParam || ""}</h3></div>
+                <div class="category">
+                    <h3>${categoryParam}</h3>
+                </div>
+
                 <img class="car-main-image" src="${car.image}" alt="${car.name}">
+
                 ${galleryHtml}
             </div>
+
         </div>
     `;
 
     carDetails.innerHTML = detailsHtml;
 
     const mainImage = carDetails.querySelector(".car-main-image");
-    carDetails.querySelectorAll(".car-img").forEach((thumb) => {
-        thumb.addEventListener("click", () => {
-            const src = thumb.getAttribute("data-src");
+    carDetails.querySelectorAll(".car-img").forEach((img) => {
+        img.addEventListener("click", () => {
+            const src = img.src;
             if (src) mainImage.src = src;
 
             carDetails.querySelectorAll(".car-img").forEach((t) => t.classList.remove("active"));
-            thumb.classList.add("active");
+            img.classList.add("active");
         });
     });
     const buyButton = document.getElementById("buy-button");
@@ -90,11 +119,11 @@ function renderDetails(car) {
 }
 
 if (!car) {
-    carDetails.innerHTML = `<p>Car not found.</p>`;
+    carDetails.innerHTML = `<h4>Car not found.</h4>`;
 } else {
     renderDetails(car);
 }
-// renderSimilar(car);
+// history / back button
 const button = document.getElementById("back-button");
 button.addEventListener('click', () => {
     window.history.back();

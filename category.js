@@ -13,7 +13,7 @@ categories.forEach(category => {
     categoryCard.classList.add("category-label");
     categoryCard.dataset.type = category;
     const img = document.createElement('img');
-    img.src = logos.find(car => car.type === category)?.logo;
+    img.src = logos[category];
 
     const text = document.createElement("span");
     text.textContent = category;
